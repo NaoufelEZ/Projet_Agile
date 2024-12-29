@@ -1,9 +1,14 @@
+<?php
+    require_once("./connect.php");
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vehicle Maintenance & Hardware</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         :root {
             --primary-color: #1e90ff;
@@ -51,6 +56,9 @@
 
         nav ul li {
             margin: 0 1rem;
+        }
+        nav ul li h3 {
+            cursor: pointer;
         }
 
         nav ul li a {
@@ -183,8 +191,31 @@
             <li><a href="#">About</a></li>
             <li><a href="#">Products</a></li>
             <li><a href="#">Contact</a></li>
-            <li><a href="./login.php" class="login-link">Login</a></li>
-            <li><a href="./signup.php">Signup</a></li>
+            <?php
+            if(isset($_SESSION["login"])){
+                $email = $_SESSION["login"];
+                $sql = "SELECT nom FROM  utilisateur WHERE email = '$email'";
+                $req = mysqli_query($conn,$sql);
+                $res = mysqli_fetch_array($req);
+                echo "<div>
+                <li>
+                <h3 class='hgu'>".$res["nom"]."</h3>
+                <div>
+                <li><a href='./?Logout=true'>Logout</a></li>
+                <li><a href='logout.php'>historique</a></li>
+                </div>
+                </li>
+
+               
+
+                </div>" ;
+            }
+            else{
+                echo "<li><a href='./login.php' class='login-link'>Login</a></li>
+                    <li><a href='./signup.php'>Signup</a></li>";
+            }
+            ?>
+           
         </ul>
     </nav>
     <div class="hero">
@@ -195,24 +226,24 @@
         </div>
     </div>
     <section class="features">
-        <div class="feature">
-            <img src="https://via.placeholder.com/300x200?text=Brake+Pads" alt="Brake Pads">
-            <h3>Brake Pads</h3>
+        <a href="peinture.php"><div class="feature">
+        <i class="fa-solid fa-paintbrush"></i>
+            <h3>Peinture</h3>
             <p>High-performance brake pads for every vehicle.</p>
-        </div>
-        <div class="feature">
-            <img src="https://via.placeholder.com/300x200?text=Oil+Filters" alt="Oil Filters">
-            <h3>Oil Filters</h3>
+        </div></a>
+        <a href="jantes.php"><div class="feature">
+        <img width="30" height="30" src="https://img.icons8.com/external-soft-fill-juicy-fish/60/external-wheel-vehicle-mechanics-soft-fill-soft-fill-juicy-fish-2.png" alt="external-wheel-vehicle-mechanics-soft-fill-soft-fill-juicy-fish-2"/>
+            <h3>Jantes</h3>
             <p>Durable and efficient oil filters for smooth driving.</p>
-        </div>
-        <div class="feature">
-            <img src="https://via.placeholder.com/300x200?text=Car+Batteries" alt="Car Batteries">
-            <h3>Car Batteries</h3>
+        </div></a>
+        <a href="Interieur.php"><div class="feature">
+        <i class="fa-solid fa-car"></i>
+            <h3>Intérieur</h3>
             <p>Reliable batteries to power your journey.</p>
-        </div>
+        </div></a>
     </section>
     <section class="product-3d">
-        <h2>Explore Our Products in 3D</h2>
+        <h2>Intérieur</h2>
         <iframe src="https://sketchfab.com/models/7w7c8f4fcbb546f4ad720cc6b4820a9f/embed" allowfullscreen></iframe>
     </section>
     <footer>

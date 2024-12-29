@@ -48,10 +48,10 @@
                     }                  
 
                 }
+                else{
+                    echo "<p style='color: red'>Invalid email or password</p>";
+                }          
             }
-            else{
-                echo "<p style='color: red'>Invalid email or password</p>";
-            }          
             ?>
         </form>
         <div class="toggle">
