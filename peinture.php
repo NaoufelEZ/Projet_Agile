@@ -51,9 +51,7 @@
             background-color: #333;
             color: #fff;
             padding: 10px 0;
-            position: absolute;
             width: 100%;
-            bottom: 0;
         }
     </style>
 </head>
@@ -67,21 +65,21 @@
         <div class="product">
             <img src="https://via.placeholder.com/250" alt="Peinture 1">
             <div class="product-name">Peinture Auto - Rouge</div>
-            <div class="product-price">€35.00</div>
+            <div class="product-price">35DT</div>
             <a href="paiment.php?sev=peinture">p</a>
         </div>
         
         <div class="product">
             <img src="https://via.placeholder.com/250" alt="Peinture 2">
             <div class="product-name">Peinture Auto - Bleu</div>
-            <div class="product-price">€40.00</div>
+            <div class="product-price">40DT</div>
             <a href="paiment.php?sev=peinture">p</a>
         </div>
         
         <div class="product">
             <img src="https://via.placeholder.com/250" alt="Peinture 3">
             <div class="product-name">Peinture Auto - Noir</div>
-            <div class="product-price">€30.00</div>
+            <div class="product-price">30DT</div>
             <a href="paiment.php?sev=peinture">p</a>
         </div>
     </div>

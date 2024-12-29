@@ -1,5 +1,29 @@
+<?php
+    require_once("./connect.php");
+    session_start();
+    if(!isset($_SESSION["login"])){
+        header("location:./login.php");
+    }
+    $service = $_GET["sev"];
+    $idService = $service == "peinture" ? 1 : ( $service == "jantes" ? 2 : 3);
+    $email = $_SESSION["login"];
+    $sql = "SELECT id_Utilisateur FROM utilisateur WHERE email = '$email'";
+    $req = mysqli_query($conn,$sql);
+    $id = mysqli_fetch_row($req)[0];
+    if(isset($_POST["btn"])){
+        $model = $_POST["car-model"];
+        $date = $_POST["date"];
+        $msg = $_POST["message"];
+
+        $sqlInsert = "INSERT INTO reservation VALUES(NULL,$id,$idService,'$model','$msg','En attente','$date')";
+        $reqInsert = mysqli_query($conn,$sqlInsert);
+        header("location:./index.php");
+
+
+    }
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,7 +60,7 @@
             color: #333;
         }
         input, select, textarea {
-            width: 100%;
+            width: 95%;
             padding: 10px;
             margin: 10px 0;
             border-radius: 5px;
@@ -71,13 +95,7 @@
 
     <div class="form-container">
         <h2>Book Your Maintenance Appointment</h2>
-        <form action="/submit-reservation" method="POST">
-            <label for="name">Your Name:</label>
-            <input type="text" id="name" name="name" required>
-
-            <label for="email">Your Email:</label>
-            <input type="email" id="email" name="email" required>
-
+        <form method="POST">
             <label for="car-model">Car Model:</label>
             <input type="text" id="car-model" name="car-model" required>
 
@@ -86,8 +104,7 @@
 
             <label for="message">Additional Notes (optional):</label>
             <textarea id="message" name="message" rows="4" placeholder="Describe any specific issues with your car or other requests..."></textarea>
-
-            <button type="submit">Reserve Appointment</button>
+            <button type="submit" name="btn">Reserve Appointment</button>
         </form>
     </div>
 
