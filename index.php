@@ -1,6 +1,11 @@
 <?php
     require_once("./connect.php");
     session_start();
+    if(isset($_GET["Logout"])){
+        session_unset();
+        session_destroy();
+        header('location:./index.php');
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -178,6 +183,29 @@
                 font-size: 1rem;
             }
         }
+        .avatar{
+            position: relative;
+        }
+        .avatar .toggle{
+            background-color: #FFF;
+            border-radius: 5px;
+            padding: 5px;
+            position: absolute;
+            top: 40px;
+            left: -25px;
+            display: none;
+        }
+        .toggle::after{
+            content: "";
+            position: absolute;
+            top: -16px;
+            left: 50%;
+            border: 8px solid;
+            border-color: transparent transparent #fff transparent;
+        }
+        .toggle.active{
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -197,14 +225,15 @@
                 $sql = "SELECT nom FROM  utilisateur WHERE email = '$email'";
                 $req = mysqli_query($conn,$sql);
                 $res = mysqli_fetch_array($req);
-                echo "<div>
+                echo "<div class='avatar'>
                 <li>
                 <h3 class='hgu'>".$res["nom"]."</h3>
-                <div>
-                <li><a href='./?Logout=true'>Logout</a></li>
-                <li><a href='logout.php'>historique</a></li>
-                </div>
                 </li>
+                <div class='toggle'>
+                <li><a href='./historique.php'>historique</a></li>
+                <li><a href='?Paramétre'>Paramétre</a></li>
+                <li><a href='?Logout=true'>déconnecter</a></li>
+                </div>
 
                
 
@@ -249,5 +278,12 @@
     <footer>
         <p>&copy; 2024 CarFixCo. All Rights Reserved.</p>
     </footer>
+    <script>
+        const avatar = document.querySelector(".avatar");
+        avatar.addEventListener("click",()=>{
+            const toggle = document.querySelector(".toggle");
+            toggle.classList.toggle("active");
+        })
+    </script>
 </body>
 </html>
