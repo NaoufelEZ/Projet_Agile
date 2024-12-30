@@ -6,7 +6,7 @@ if(isset($_SESSION["login"])){
     $sql = "SELECT role FROM utilisateur WHERE email = '$email'";
     $req = mysqli_query($conn,$sql);
     $res = mysqli_fetch_row($req)[0];
-    if($res == "Technician" || $res == "Administrateur" || $res == "Client"){
+    if($res == "Technician" || $res == "Administrateur"){
 
 ?>
 <!DOCTYPE html>
