@@ -92,38 +92,35 @@
         }
 
         .hero {
-            background: url('https://images.unsplash.com/photo-1619331258261-8fc7a6c3d45a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDl8fGF1dG9tb3RpdmV8ZW58MHx8fHwxNjg2OTIwMjk0&ixlib=rb-4.0.3&q=80&w=1920') no-repeat center center/cover;
-            height: 70vh;
+            height: 450px;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: top;
             color: white;
-            text-align: center;
             padding: 1rem;
+            width: 100%;
         }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+        .hero .cont{
+            width: 50%;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
         }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
+        .hero .show img{
+            width: 250px;
+            height: 250px;
+            border-radius: 15px ;
         }
-
-        .hero a {
-            background: var(--primary-color);
-            color: white;
-            padding: 0.5rem 1.5rem;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
+        .hero .decr{
+            display: flex;
+            color: #000;
+            width: 100%;
+            justify-content: space-around;
         }
-
-        .hero a:hover {
-            background: white;
-            color: var(--primary-color);
+        
+        .hero .decr .box{
+            cursor: pointer;
+            width: 200px;
         }
 
         .features {
@@ -222,7 +219,7 @@
             <?php
             if(isset($_SESSION["login"])){
                 $email = $_SESSION["login"];
-                $sql = "SELECT nom FROM  utilisateur WHERE email = '$email'";
+                $sql = "SELECT nom,role FROM  utilisateur WHERE email = '$email'";
                 $req = mysqli_query($conn,$sql);
                 $res = mysqli_fetch_array($req);
                 echo "<div class='avatar'>
@@ -230,9 +227,10 @@
                 <h3 class='hgu'>".$res["nom"]."</h3>
                 </li>
                 <div class='toggle'>
-                <li><a href='./historique.php'>historique</a></li>
-                <li><a href='?Paramétre'>Paramétre</a></li>
-                <li><a href='?Logout=true'>déconnecter</a></li>
+                " .( $res == 'Client' ? "<li><a href='./historique.php'>historique</a></li>"
+                    : "<li><a href='./dashboard/reservation.php'>Dashboard</a></li>").
+                "<li><a href='?Paramétre'>Paramétre</a></li>
+                <li><a href='?Logout=true'>Déconnecter</a></li>
                 </div>
 
                
@@ -248,11 +246,20 @@
         </ul>
     </nav>
     <div class="hero">
-        <div>
-            <h1>Your Reliable Car Maintenance Partner</h1>
-            <p>Explore high-quality car hardware and repair services.</p>
-            <a href="#">Shop Now</a>
+        <div class="cont">
+        <div class="show">
+            <img class="cover" src="https://www.amiraltechnologies.com/wp2k23/wp-content/uploads/2022/12/8839_032_gestion-et-integration-de-maintenance-industrielle-cta-maintenance-industrielle.jpeg" alt="">
         </div>
+        <div class="decr">
+            <div class="box">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit, dolorum? Accusantium itaque quae magni veritatis deleniti, sed voluptatum inventore tempore!
+            </div>
+            <div class="box">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil at illo nesciunt beatae architecto inventore quia ratione fugiat molestiae eius!
+            </div>
+        </div>
+    </div>
+
     </div>
     <section class="features">
         <a href="peinture.php"><div class="feature">
@@ -284,6 +291,27 @@
             const toggle = document.querySelector(".toggle");
             toggle.classList.toggle("active");
         })
+        const cover = document.querySelector(".cover");
+        const decr = document.querySelectorAll(".decr .box");
+            decr.forEach((elem,i)=>{
+                elem.addEventListener("click",()=>{
+                    if(i == 0){
+                        cover.src="https://www.amiraltechnologies.com/wp2k23/wp-content/uploads/2022/12/8839_032_gestion-et-integration-de-maintenance-industrielle-cta-maintenance-industrielle.jpeg"
+                    }
+                    else{
+                        cover.src="https://www.fieldeagle.com/wp-content/uploads/2023/01/regular_maintenance_header.png"
+                    }
+                });
+            })
+            let isFirstImage = true;
+
+setInterval(() => {
+    cover.src = isFirstImage
+        ? "https://www.fieldeagle.com/wp-content/uploads/2023/01/regular_maintenance_header.png"
+        : "https://www.amiraltechnologies.com/wp2k23/wp-content/uploads/2022/12/8839_032_gestion-et-integration-de-maintenance-industrielle-cta-maintenance-industrielle.jpeg";
+    isFirstImage = !isFirstImage; // Toggle the boolean
+}, 6000);
+
     </script>
 </body>
 </html>
