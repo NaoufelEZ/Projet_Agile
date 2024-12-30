@@ -8,7 +8,7 @@
     }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -227,9 +227,9 @@
                 <h3 class='hgu'>".$res["nom"]."</h3>
                 </li>
                 <div class='toggle'>
-                " .( $res == 'Client' ? "<li><a href='./historique.php'>historique</a></li>"
+                " .( $res["role"] == 'Client' ? "<li><a href='./historique.php'>historique</a></li>"
                     : "<li><a href='./dashboard/reservation.php'>Dashboard</a></li>").
-                "<li><a href='?Paramétre'>Paramétre</a></li>
+                "<li><a href='./parametre.php'>Paramétre</a></li>
                 <li><a href='?Logout=true'>Déconnecter</a></li>
                 </div>
 
