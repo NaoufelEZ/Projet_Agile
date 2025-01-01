@@ -228,7 +228,7 @@
                 </li>
                 <div class='toggle'>
                 " .( $res["role"] == 'Client' ? "<li><a href='./historique.php'>historique</a></li>"
-                    : "<li><a href='./dashboard/reservation.php'>Dashboard</a></li>").
+                    : ($res["role"] == 'Administrateur' ? "<li><a href='./dashboard/index.php'>Dashboard</a></li>" : "<li><a href='./dashboard/reservation.php'>Reservation</a></li>"  )).
                 "<li><a href='./parametre.php'>Paramétre</a></li>
                 <li><a href='?Logout=true'>Déconnecter</a></li>
                 </div>
