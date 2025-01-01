@@ -19,20 +19,9 @@ if(isset($_SESSION["login"])){
 <body>
 <div class="sidebar">
     <h2>Dashboard</h2>
-    <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Profile</a></li>
-      <li><a href="#">Settings</a></li>
-      <li>
-      <a href="" class="there">Reservation</a>
-        <ul class="sub-menu">
-          <li><a href="./reservation.php">En Attende</a></li>
-          <li><a href="./reservationAccept.php">Accept</a></li>
-          <li><a href="./reservationRefuse.php">Refuse</a></li>
-        </ul>
-      </li>
-      <li><a href="#">Logout</a></li>
-    </ul>
+    <?php
+    require_once("./header.php");
+    ?>
   </div>
   <div class="main-content">
     <div class="top-bar">
