@@ -272,6 +272,7 @@
         <p>&copy; 2024 CarFixCo. All Rights Reserved.</p>
     </footer>
     <script>
+        
         const avatar = document.querySelector(".avatar");
         avatar.addEventListener("click",()=>{
             const toggle = document.querySelector(".toggle");

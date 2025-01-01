@@ -140,8 +140,8 @@
         }
 
         .features .feature img {
-            max-width: 100%;
-            height: auto;
+            width: 250px;
+            height: 250px;
             border-radius: 10px;
         }
 
@@ -262,18 +262,21 @@
 
     </div>
     <section class="features">
-        <a href="peinture.php"><div class="feature">
-        <i class="fa-solid fa-paintbrush"></i>
+        <a href="peinture.php">
+        <div class="feature">
+                <img src="./images/Covering-ou-Peinture-article3.webp" alt="">
             <h3>Peinture</h3>
             <p>High-performance brake pads for every vehicle.</p>
         </div></a>
-        <a href="jantes.php"><div class="feature">
-        <img width="30" height="30" src="https://img.icons8.com/external-soft-fill-juicy-fish/60/external-wheel-vehicle-mechanics-soft-fill-soft-fill-juicy-fish-2.png" alt="external-wheel-vehicle-mechanics-soft-fill-soft-fill-juicy-fish-2"/>
+        <a href="jantes.php">
+            <div class="feature">
+                <img src="./images/nettoyant-jantes-hard-750ml.webp" alt="">
             <h3>Jantes</h3>
             <p>Durable and efficient oil filters for smooth driving.</p>
         </div></a>
-        <a href="Interieur.php"><div class="feature">
-        <i class="fa-solid fa-car"></i>
+        <a href="Interieur.php">
+            <div class="feature">
+                <img src="./images/automatique-victimes.webp" alt="">
             <h3>Intérieur</h3>
             <p>Reliable batteries to power your journey.</p>
         </div></a>

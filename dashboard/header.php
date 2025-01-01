@@ -1,6 +1,6 @@
 <?php
 echo "<ul>";
-    if($res == "Administrateur"){
+    if($res[0] == "Administrateur"){
     echo "<li><a href='./index.php'>Home</a></li>
       <li><a href='./users.php'>Users</a></li>
       <li><a href='./ajouteuser.php'>Ajoute User</a></li>

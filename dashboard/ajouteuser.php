@@ -1,5 +1,12 @@
 <?php
   require_once("../connect.php");
+  session_start();
+  if(isset($_SESSION["login"])){
+    $email = $_SESSION["login"];
+    $sql = "SELECT role,nom FROM utilisateur WHERE email = '$email'";
+    $req = mysqli_query($conn,$sql);
+    $res = mysqli_fetch_row($req);
+    if($res[0] == "Administrateur"){
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +20,7 @@
 </head>
 <body>
   <div class="sidebar">
-    <h2>Reservation</h2>
+    <h2>Tableau de Board</h2>
     <ul>
     <li><a href="./index.php">Home</a></li>
       <li><a href="./users.php">Users</a></li>
@@ -39,7 +46,17 @@
       <button class="btn" type="button">OK</button>
     </div>
     <div class="top-bar">
-      Welcome to Your Dashboard
+    <div class="avatar">
+            <?php
+        echo "<h3>". $res[1] ."</h3>";
+        ?>
+      <div class='toggle'>
+        <ul>
+          <li><a href='./parametre.php'>Paramétre</a></li>
+          <li><a href='?Logout=true'>Déconnecter</a></li>
+        </ul>
+        </div>
+    </div>
     </div>
     <div class="content">
     <form id="signup-form" method="POST">
@@ -119,3 +136,11 @@
   <script src="main.js"></script>
 </body>
 </html>
+<?php
+    }else{
+    header("location:../index.php");
+    }
+  }else{
+    header("location:../login.php");
+    }
+?>

@@ -3,10 +3,10 @@ require_once("../connect.php");
 session_start();
 if(isset($_SESSION["login"])){
     $email = $_SESSION["login"];
-    $sql = "SELECT role FROM utilisateur WHERE email = '$email'";
+    $sql = "SELECT role,nom FROM utilisateur WHERE email = '$email'";
     $req = mysqli_query($conn,$sql);
-    $res = mysqli_fetch_row($req)[0];
-    if($res == "Administrateur"){
+    $res = mysqli_fetch_row($req);
+    if($res[0] == "Administrateur"){
         if(isset($_GET["delete"])){
             $id = $_GET["id"];
             $sql = "DELETE FROM utilisateur WHERE id_Utilisateur = $id";
@@ -26,7 +26,7 @@ if(isset($_SESSION["login"])){
 </head>
 <body>
 <div class="sidebar">
-    <h2>Dashboard</h2>
+    <h2>Tableau de Board</h2>
     <ul>
     <li><a href="./index.php">Home</a></li>
       <li><a href="./users.php">Users</a></li>
@@ -55,7 +55,17 @@ if(isset($_SESSION["login"])){
 </div>
 
     <div class="top-bar">
-      Welcome to Your Dashboard
+    <div class="avatar">
+            <?php
+        echo "<h3>". $res[1] ."</h3>";
+        ?>
+      <div class='toggle'>
+        <ul>
+          <li><a href='./parametre.php'>Paramétre</a></li>
+          <li><a href='?Logout=true'>Déconnecter</a></li>
+        </ul>
+        </div>
+    </div>
 </div>
 <div class="content">
 

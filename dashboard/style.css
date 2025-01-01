@@ -248,33 +248,70 @@ table td:first-child {
   display: none;
 }
 
-.show h2,.add h2 {
-  color: #ff4d4d; 
+
+.add h2 {
+  text-align: center;
+  color: green;
+  font-weight: bold;
+  font-size: 36px;
+  margin: 0; /* Remove default margins */
+}
+
+.add .text {
+  margin-top: 20px;
+}
+
+.add .text p {
+  text-align: center;
+  font-size: 18px;
+  color: #333;
+  margin: 0; /* Ensure consistency in spacing */
+}
+
+.add button {
+  background-color: #1e90ff; /* Blue background for the button */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 20px auto 0; /* Center the button and add spacing */
+  display: block; /* Ensure it's centered horizontally */
+  transition: background-color 0.3s ease-in-out;
+}
+
+.add button:hover {
+  background-color: #007acc; /* Slightly darker blue on hover */
+}
+.add.active{
+  display: block;
+}
+
+.show h2 {
+  color: #ff4d4d; /* Warning red color for attention */
   font-weight: bold;
   font-size: 36px;
   margin: 0;
 }
-.add h2{
-  color: green; 
-}
 
-.add .text, .show .text {
+.show .text {
   margin-top: 20px;
 }
 
-.add .text p, .show .text p {
+.show .text p {
   font-size: 18px;
   color: #333;
 }
 
-.add .buttons, .show .buttons {
+.show .buttons {
   margin-top: 30px;
   display: flex;
   justify-content: center;
-  gap: 15px; 
+  gap: 15px; /* Space between buttons */
 }
 
-.add button{
+.show button {
   background-color: #1e90ff;
   color: #fff;
   border: none;
@@ -285,17 +322,14 @@ table td:first-child {
   transition: background-color 0.3s ease-in-out;
 }
 
- .show button.yes {
-  background-color: #ff4d4d;
+.show button.yes {
+  background-color: #ff4d4d; /* Red for the "Yes" button */
 }
 
 .show button.no {
-  background-color: #1e90ff;
+  background-color: #1e90ff; /* Blue for the "No" button */
 }
 
-.add button:hover, .show button:hover {
-  opacity: 0.8; 
-}
-.add.active{
-  display: block;
+.show button:hover {
+  opacity: 0.8; /* Subtle hover effect */
 }

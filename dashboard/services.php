@@ -3,10 +3,10 @@ require_once("../connect.php");
 session_start();
 if(isset($_SESSION["login"])){
     $email = $_SESSION["login"];
-    $sql = "SELECT role FROM utilisateur WHERE email = '$email'";
+    $sql = "SELECT role,nom FROM utilisateur WHERE email = '$email'";
     $req = mysqli_query($conn,$sql);
-    $res = mysqli_fetch_row($req)[0];
-    if($res == "Administrateur"){
+    $res = mysqli_fetch_row($req);
+    if($res[0] == "Administrateur"){
       if(isset($_GET["delete"])){
         $id = $_GET["id"];
         $sql = "DELETE FROM service WHERE serviceID = $id";
@@ -22,11 +22,11 @@ if(isset($_SESSION["login"])){
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <meta charset="UTF-8">
-    <title>Reservation Accept</title>
+    <title>Services</title>
 </head>
 <body>
 <div class="sidebar">
-    <h2>Dashboard</h2>
+    <h2>Tableau de Board</h2>
     <ul>
     <li><a href="./index.php">Home</a></li>
       <li><a href="./users.php">Users</a></li>
@@ -56,7 +56,17 @@ if(isset($_SESSION["login"])){
 </div>
 
     <div class="top-bar">
-      Welcome to Your Dashboard
+    <div class="avatar">
+            <?php
+        echo "<h3>". $res[1] ."</h3>";
+        ?>
+      <div class='toggle'>
+        <ul>
+          <li><a href='../parametre'>Paramétre</a></li>
+          <li><a href='?Logout=true'>Déconnecter</a></li>
+        </ul>
+        </div>
+    </div>
 </div>
 <div class="content">
 

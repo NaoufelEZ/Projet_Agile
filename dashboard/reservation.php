@@ -38,7 +38,7 @@ if(isset($_SESSION["login"])){
 </head>
 <body>
 <div class="sidebar">
-    <h2>Dashboard</h2>
+    <h2>Tableau de Board</h2>
     <?php
     require_once("./header.php");
     ?>

@@ -2,7 +2,7 @@ const avatar = document.querySelector(".avatar");
 avatar.addEventListener("click",()=>{
     const toggle = document.querySelector(".toggle");
     toggle.classList.toggle("active");
-})
+});
       
       
       const reservationLink = document.querySelector('.sidebar ul li .there');
