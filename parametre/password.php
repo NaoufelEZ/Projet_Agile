@@ -245,7 +245,8 @@
 
                         <label for="confirm-password">Confirm New Password</label>
                         <input type="password" id="confirm-password" name="confirm_password" placeholder="Confirm new password" required>
-                        <button type="submit" name="btn">Change Password</button>
+                        <button type="submit"  name="btn">Change Password</button>
+                        <span class="err"></span>
                         <?php
                             if(isset($_POST["btn"])){
                             $oldPassword = $_POST["old_password"];
@@ -272,7 +273,23 @@
         <p>&copy; 2024 CarFixCo. All Rights Reserved.</p>
     </footer>
     <script>
-        
+        const button = document.querySelector("button");
+        console.log(button);
+        button.addEventListener("click",(e)=>{
+            e.preventDefault();
+            const confirmPassword = document.querySelector("#confirm-password").value;
+            const newPassword = document.querySelector("#new-password").value;
+            const err = document.querySelector(".err");
+            if(confirmPassword !== newPassword){
+                err.innerHTML = "the password should be the same";
+            }
+            else{
+                err.innerHTML = "";
+                
+            }
+
+
+        });
         const avatar = document.querySelector(".avatar");
         avatar.addEventListener("click",()=>{
             const toggle = document.querySelector(".toggle");
