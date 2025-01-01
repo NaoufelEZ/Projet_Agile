@@ -1,5 +1,16 @@
+<?php
+require_once("../connect.php");
+session_start();
+if(isset($_SESSION["login"])){
+    $email = $_SESSION["login"];
+    $sql = "SELECT role FROM utilisateur WHERE email = '$email'";
+    $req = mysqli_query($conn,$sql);
+    $res = mysqli_fetch_row($req)[0];
+    if($res == "Administrateur"){
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,18 +22,18 @@
   <div class="sidebar">
     <h2>Reservation</h2>
     <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Profile</a></li>
-      <li><a href="#">Settings</a></li>
+    <li><a href="./index.php">Home</a></li>
+      <li><a href="./users.php">Users</a></li>
+      <li><a href="./ajouteuser.php">Ajoute User</a></li>
+      <li><a href="./services.php">Services</a></li>
+      <li><a href="./ajouteservice.php">Ajoute Service</a></li>
       <li>
-        <a href="" class="there">Reservation</a>
+      <a href="" class="there">Reservation</a>
         <ul class="sub-menu">
           <li><a href="./reservation.php">En Attende</a></li>
           <li><a href="./reservationAccept.php">Accept</a></li>
           <li><a href="./reservationRefuse.php">Refuse</a></li>
         </ul>
-      </li>
-      <li><a href="#">Logout</a></li>
     </ul>
   </div>
 
@@ -35,15 +46,27 @@
       <div class="cards">
         <div class="card">
           <h3>Users</h3>
-          <p>1,245</p>
+          <?php
+            $sql = "SELECT * FROM utilisateur";
+            $req = mysqli_query($conn,$sql);
+            echo "<p>". mysqli_num_rows($req) ."</p>";
+          ?>
         </div>
         <div class="card">
-          <h3>Sales</h3>
-          <p>$8,430</p>
+          <h3>Services</h3>
+          <?php
+            $sql = "SELECT * FROM service";
+            $req = mysqli_query($conn,$sql);
+            echo "<p>". mysqli_num_rows($req) ."</p>";
+          ?>
         </div>
         <div class="card">
-          <h3>Feedback</h3>
-          <p>320</p>
+          <h3>Reservation</h3>
+          <?php
+            $sql = "SELECT * FROM reservation";
+            $req = mysqli_query($conn,$sql);
+            echo "<p>". mysqli_num_rows($req) ."</p>";
+          ?>
         </div>
       </div>
     </div>
@@ -51,3 +74,14 @@
   <script src="main.js"></script>
 </body>
 </html>
+<?php
+}
+else{
+    header("location:../index.php");
+}
+}
+else{
+    header("location:../login.php");
+}
+
+?>
