@@ -182,6 +182,7 @@
         }
         .avatar{
             position: relative;
+            width: 100px;
         }
         .avatar .toggle{
             background-color: #FFF;
@@ -192,7 +193,10 @@
             left: -25px;
             display: none;
         }
-        .toggle::after{
+        .avatar .toggle ul li{
+            background-color: red;
+        }
+        .toggle::before{
             content: "";
             position: absolute;
             top: -16px;
@@ -227,6 +231,7 @@
                 <h3 class='hgu'>".$res["nom"]."</h3>
                 </li>
                 <div class='toggle'>
+                
                 " .( $res["role"] == 'Client' ? "<li><a href='./historique.php'>historique</a></li>"
                     : ($res["role"] == 'Administrateur' ? "<li><a href='./dashboard/index.php'>Dashboard</a></li>" : "<li><a href='./dashboard/reservation.php'>Reservation</a></li>"  )).
                 "<li><a href='./parametre/index.php'>Paramétre</a></li>
