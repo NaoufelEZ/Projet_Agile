@@ -193,8 +193,11 @@
             left: -25px;
             display: none;
         }
-        .avatar .toggle ul li{
-            background-color: red;
+        nav .avatar .toggle ul{
+            display: list-item;
+        }
+         nav .avatar .toggle ul li{
+            padding: 5px 0;
         }
         .toggle::before{
             content: "";
@@ -231,11 +234,11 @@
                 <h3 class='hgu'>".$res["nom"]."</h3>
                 </li>
                 <div class='toggle'>
-                
+                <ul>
                 " .( $res["role"] == 'Client' ? "<li><a href='./historique.php'>historique</a></li>"
                     : ($res["role"] == 'Administrateur' ? "<li><a href='./dashboard/index.php'>Dashboard</a></li>" : "<li><a href='./dashboard/reservation.php'>Reservation</a></li>"  )).
                 "<li><a href='./parametre/index.php'>Paramétre</a></li>
-                <li><a href='?Logout=true'>Déconnecter</a></li>
+                <li><a href='?Logout=true'>Déconnecter</a></li></ul>
                 </div>
 
                
