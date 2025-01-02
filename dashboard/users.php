@@ -93,7 +93,7 @@ if(isset($_SESSION["login"])){
         <td>". $ligne["role"] ."</td>
         <td>". $ligne["email"] ."</td>";
         if($email == $ligne["email"]){
-            echo "<td><div class='space'><a href='?accept=true&id=". $ligne["id_Utilisateur"] ."'><i class='fa-solid fa-pen-to-square'></i></div></td>";
+            echo "<td><div class='space'><a style='background-color:#28a745;' href='?accept=true&id=". $ligne["id_Utilisateur"] ."'><i class='fa-solid fa-pen-to-square'></i></div></td>";
         }
         else{
             echo "<td><div class='space'><a href='?accept=true&id=". $ligne["id_Utilisateur"] ."'><i class='fa-solid fa-pen-to-square'></i></a><a class='delete' href='?delete&id=". $ligne["id_Utilisateur"] ."'><i class='fa-solid fa-trash'></i></a></div></td>";
