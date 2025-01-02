@@ -108,6 +108,13 @@
         }
         .avatar{
             position: relative;
+            width: 100px;
+        }
+        nav .avatar .toggle ul{
+            display: list-item;
+        }
+         nav .avatar .toggle ul li{
+            padding: 5px 0;
         }
         .avatar .toggle{
             background-color: #FFF;
