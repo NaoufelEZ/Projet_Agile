@@ -1,12 +1,13 @@
 <?php
     require_once("../connect.php");
+    ob_start();
     session_start();
     if(isset($_SESSION["login"])){
-    
         if(isset($_GET["Logout"])){
             session_unset();
             session_destroy();
             header('location:../index.php');
+            exit;
         }
 ?>
 <!DOCTYPE html>
@@ -196,7 +197,7 @@
     <nav>
         <div class="logo">CarFixCo</div>
         <ul>
-            <li><a href="./index.php">Home</a></li>
+            <li><a href="../index.php">Home</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Products</a></li>
             <li><a href="#">Contact</a></li>
@@ -213,7 +214,7 @@
                 <div class='toggle'>
                 " .( $res["role"] == 'Client' ? "<li><a href='./historique.php'>historique</a></li>"
                     : ($res["role"] == 'Administrateur' ? "<li><a href='./dashboard/index.php'>Dashboard</a></li>" : "<li><a href='./dashboard/reservation.php'>Reservation</a></li>"  )).
-                "<li><a href='./parametre/index.php'>Paramétre</a></li>
+                "<li><a href='./index.php'>Paramétre</a></li>
                 <li><a href='?Logout=true'>Déconnecter</a></li>
                 </div>
                 </div>" ;
@@ -245,21 +246,28 @@
 
                         <label for="confirm-password">Confirm New Password</label>
                         <input type="password" id="confirm-password" name="confirm_password" placeholder="Confirm new password" required>
-                        <button type="submit"  name="btn">Change Password</button>
-                        <span class="err"></span>
+                        <button type="submit" name="btn">Change Password</button>
                         <?php
                             if(isset($_POST["btn"])){
                             $oldPassword = $_POST["old_password"];
+                            $confPassword = $_POST["confirm_password"];
                             $newPassword = $_POST["new_password"];
-                            $rightPassword = password_verify($oldPassword,$res["password"]);
-                            if($rightPassword){
-                                $id = $res["id_Utilisateur"];
-                                $newPasswordHash =password_hash($newPassword,false);
-                                $sqlPassword = "UPDATE utilisateur SET password = '$newPasswordHash' WHERE id_Utilisateur = $id";
-                                $reqPassword = mysqli_query($conn,$sqlPassword);
+                            if($confPassword == $newPassword){
+                                $rightPassword = password_verify($oldPassword,$res["password"]);
+                                if($rightPassword){
+                                    $id = $res["id_Utilisateur"];
+                                    $newPasswordHash =password_hash($newPassword,false);
+                                    $sqlPassword = "UPDATE utilisateur SET password = '$newPasswordHash' WHERE id_Utilisateur = $id";
+                                    $reqPassword = mysqli_query($conn,$sqlPassword);
+                                    header("location:./password.php");
+                                    ob_end_flush();
+                                }
+                                else{
+                                    echo "<p>the password are wrong</p>";
+                                }  
                             }
                             else{
-                                echo "<p>the password</p>";
+                                echo "<p>the password should be the same</p>";
                             }
                         }
 
@@ -273,23 +281,6 @@
         <p>&copy; 2024 CarFixCo. All Rights Reserved.</p>
     </footer>
     <script>
-        const button = document.querySelector("button");
-        console.log(button);
-        button.addEventListener("click",(e)=>{
-            e.preventDefault();
-            const confirmPassword = document.querySelector("#confirm-password").value;
-            const newPassword = document.querySelector("#new-password").value;
-            const err = document.querySelector(".err");
-            if(confirmPassword !== newPassword){
-                err.innerHTML = "the password should be the same";
-            }
-            else{
-                err.innerHTML = "";
-                
-            }
-
-
-        });
         const avatar = document.querySelector(".avatar");
         avatar.addEventListener("click",()=>{
             const toggle = document.querySelector(".toggle");
@@ -301,7 +292,8 @@
 <?php
     }
     else{
-        header("Location:./index.php");
+        header("Location:../index.php");
+        exit;
 
     }
 ?>
