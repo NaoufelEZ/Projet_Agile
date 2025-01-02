@@ -1,5 +1,6 @@
 <?php
     require_once("../connect.php");
+    ob_start();
     session_start();
     if(isset($_SESSION["login"])){
     
@@ -199,7 +200,7 @@
     <nav>
         <div class="logo">CarFixCo</div>
         <ul>
-            <li><a href="./index.php">Home</a></li>
+            <li><a href="../index.php">Home</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Products</a></li>
             <li><a href="#">Contact</a></li>
@@ -216,7 +217,7 @@
                 <div class='toggle'>
                 " .( $res["role"] == 'Client' ? "<li><a href='./historique.php'>historique</a></li>"
                     : ($res["role"] == 'Administrateur' ? "<li><a href='./dashboard/index.php'>Dashboard</a></li>" : "<li><a href='./dashboard/reservation.php'>Reservation</a></li>"  )).
-                "<li><a href='./parametre/index.php'>Paramétre</a></li>
+                "<li><a href='./index.php'>Paramétre</a></li>
                 <li><a href='?Logout=true'>Déconnecter</a></li>
                 </div>
                 </div>" ;
@@ -239,26 +240,58 @@
             <section class="info" id="password">
                 <div id="password" class="content">
                     <h2>Change Information</h2>
-                    <form action="/update_password" method="POST">
+                    <form method="POST">
                         <?php
                         echo "
                     <label for='current-password'>CIN</label>
-                        <input type='text' id='current-password' name='current_password' value=". $res["CIN"] ." placeholder='Enter current CIN' required>
+                        <input type='text' id='current-password' name='cin' value=". $res["CIN"] ." placeholder='Enter current CIN' required>
                         
                         <label for='current-password'>Nom</label>
-                        <input type='text' id='current-password' name='current_password' value=". $res["nom"] ." placeholder='Enter current password' required>
+                        <input type='text' id='current-password' name='nom' value=". $res["nom"] ." placeholder='Enter current password' required>
 
                         <label for='new-password'>Prenom</label>
-                        <input type='text' id='new-password' name='new_password' value=". $res["prenom"] ." placeholder='Enter new prénom' required>
+                        <input type='text' id='new-password' name='prenom' value=". $res["prenom"] ." placeholder='Enter new prénom' required>
 
                         <label for='confirm-password'>Usernmae</label>
-                        <input type='text' id='confirm-password' name='confirm_password' value=". $res["username"] ." placeholder='Confirm new username' required>
+                        <input type='text' id='confirm-password' name='username' value=". $res["username"] ." placeholder='Confirm new username' required>
                         
                         <label for='confirm-password'>Email</label>
-                        <input type='email' id='confirm-password' name='confirm_password' value=". $res["email"] ." placeholder='Confirm new email' required>
-                    ";
+                        <input type='email' id='confirm-password' name='email' value=". $res["email"] ." placeholder='Confirm new email' required>
+                        ";
+                        if(isset($_POST["btn"])){
+                            $cin = $_POST["cin"];
+                            $nom = $_POST["nom"];
+                            $prenom = $_POST["prenom"];
+                            $username = $_POST["username"];
+                            $email = $_POST["email"];
+                            $id = $res["id_Utilisateur"];
+                            $sqlCin = "SELECT * FROM utilisateur WHERE (id_Utilisateur = $id AND CIN = '$cin') OR NOT EXISTS ( SELECT 1 FROM utilisateur WHERE CIN = '$cin');";
+                            $reqCIN = mysqli_query($conn,$sqlCin);
+                            $sqlEmail = "SELECT * FROM utilisateur WHERE (id_Utilisateur = $id AND email = '$email') OR NOT EXISTS ( SELECT 1 FROM utilisateur WHERE email = '$email');";
+                            $reqEmail = mysqli_query($conn,$sqlEmail);
+                            $sqlUsername = "SELECT * FROM utilisateur WHERE (id_Utilisateur =$id AND username = '$username') OR NOT EXISTS ( SELECT 1 FROM utilisateur WHERE username = '$username');";
+                            $reqUsername = mysqli_query($conn,$sqlUsername);
+                            if(mysqli_num_rows($reqCIN) == 0){
+                                echo "<p>CIN deja existe";
+                            }
+                            else if(mysqli_num_rows($reqEmail) == 0){
+                                echo "<p>Email deja existe";
+                            }
+                            else if(mysqli_num_rows($reqUsername) == 0){
+                                echo "<p>Username deja existe</p>";
+                            }
+                            else{
+                                $sql = "UPDATE utilisateur SET CIN='$cin',nom='$nom',prenom='$prenom',email='$email',username='$username' WHERE id_Utilisateur = $id";
+                                $req = mysqli_query($conn,$sql);
+                                header("location:./index.php");
+                                ob_end_flush();
+                            }
+                        }
                     ?>
-                        <button type='submit'>Change Password</button>
+                        <button type='submit' name="btn">Change Password</button>
+                        <?php
+                        
+                        ?>
                     </form>
                 </div>
             </section>
