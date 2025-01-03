@@ -4,8 +4,10 @@
     if(!isset($_SESSION["login"])){
         header("location:./login.php");
     }
-    $service = $_GET["sev"];
-    $idService = $service == "peinture" ? 1 : ( $service == "jantes" ? 2 : 3);
+    $service = $_GET["ser"];
+    $idService = $service;
+    $idproduct = $_GET["pro"];
+
     $email = $_SESSION["login"];
     $sql = "SELECT id_Utilisateur FROM utilisateur WHERE email = '$email'";
     $req = mysqli_query($conn,$sql);
@@ -15,7 +17,7 @@
         $date = $_POST["date"];
         $msg = $_POST["message"];
 
-        $sqlInsert = "INSERT INTO reservation VALUES(NULL,$id,$idService,'$model','$msg','En attente','$date')";
+        $sqlInsert = "INSERT INTO reservation VALUES(NULL,$id,$idService,$idproduct,'$model','$msg','En attente','$date')";
         $reqInsert = mysqli_query($conn,$sqlInsert);
         header("location:./index.php");
 

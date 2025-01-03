@@ -92,36 +92,32 @@
         }
 
         .hero {
-            height: 450px;
+            background: url('./images/wmremove-transformed.avif') no-repeat center center/cover;
+            height: 70vh;
             display: flex;
             justify-content: center;
-            align-items: top;
-            color: white;
-            padding: 1rem;
-            width: 100%;
-        }
-        .hero .cont{
-            width: 50%;
-            display: flex;
             align-items: center;
-            flex-direction: column;
+            color: white;
+            text-align: center;
+            padding: 1rem;
         }
-        .hero .show img{
-            width: 250px;
-            height: 250px;
-            border-radius: 15px ;
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: #00000057;
+            border-radius: 10px;
+            padding: 4px;
+            
         }
-        .hero .decr{
-            display: flex;
-            color: #000;
-            width: 100%;
-            justify-content: space-around;
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            background: #00000057;
+            border-radius: 10px;
         }
-        
-        .hero .decr .box{
-            cursor: pointer;
-            width: 200px;
-        }
+
 
         .features {
             display: grid;
@@ -143,6 +139,9 @@
             width: 250px;
             height: 250px;
             border-radius: 10px;
+        }
+        .features  a {
+           text-decoration: none;
         }
 
         .features .feature h3 {
@@ -254,44 +253,26 @@
         </ul>
     </nav>
     <div class="hero">
-        <div class="cont">
-        <div class="show">
-            <img class="cover" src="https://www.amiraltechnologies.com/wp2k23/wp-content/uploads/2022/12/8839_032_gestion-et-integration-de-maintenance-industrielle-cta-maintenance-industrielle.jpeg" alt="">
-        </div>
-        <div class="decr">
-            <div class="box">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit, dolorum? Accusantium itaque quae magni veritatis deleniti, sed voluptatum inventore tempore!
-            </div>
-            <div class="box">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil at illo nesciunt beatae architecto inventore quia ratione fugiat molestiae eius!
-            </div>
+        <div class="text">
+            <h1>Your Reliable Car Maintenance Partner</h1>
+            <p>Explore high-quality car hardware and repair services.</p>
         </div>
     </div>
 
     </div>
     <section class="features">
-        <a href="peinture.php">
-        <div class="feature">
-                <img src="./images/Covering-ou-Peinture-article3.webp" alt="">
-            <h3>Peinture</h3>
-            <p>High-performance brake pads for every vehicle.</p>
-        </div></a>
-        <a href="jantes.php">
-            <div class="feature">
-                <img src="./images/nettoyant-jantes-hard-750ml.webp" alt="">
-            <h3>Jantes</h3>
-            <p>Durable and efficient oil filters for smooth driving.</p>
-        </div></a>
-        <a href="Interieur.php">
-            <div class="feature">
-                <img src="./images/automatique-victimes.webp" alt="">
-            <h3>Intérieur</h3>
-            <p>Reliable batteries to power your journey.</p>
-        </div></a>
-    </section>
-    <section class="product-3d">
-        <h2>Intérieur</h2>
-        <iframe src="https://sketchfab.com/models/7w7c8f4fcbb546f4ad720cc6b4820a9f/embed" allowfullscreen></iframe>
+        <?php
+            $sqlService = "SELECT * FROM service";
+            $req = mysqli_query($conn,$sqlService);
+            while($res = mysqli_fetch_array($req)){
+                echo "<a href='./service.php?id=".$res["serviceID"]."'>
+                <div class='feature'>
+                    <img src='".$res["images"]."' alt=''>
+                    <h3>".$res["serviceName"]."</h3>
+                    <p>".$res["description"]."</p>
+                </div></a>";
+            }
+        ?>
     </section>
     <footer>
         <p>&copy; 2024 CarFixCo. All Rights Reserved.</p>
@@ -301,28 +282,7 @@
         avatar.addEventListener("click",()=>{
             const toggle = document.querySelector(".toggle");
             toggle.classList.toggle("active");
-        })
-        const cover = document.querySelector(".cover");
-        const decr = document.querySelectorAll(".decr .box");
-            decr.forEach((elem,i)=>{
-                elem.addEventListener("click",()=>{
-                    if(i == 0){
-                        cover.src="https://www.amiraltechnologies.com/wp2k23/wp-content/uploads/2022/12/8839_032_gestion-et-integration-de-maintenance-industrielle-cta-maintenance-industrielle.jpeg"
-                    }
-                    else{
-                        cover.src="https://www.fieldeagle.com/wp-content/uploads/2023/01/regular_maintenance_header.png"
-                    }
-                });
-            })
-            let isFirstImage = true;
-
-setInterval(() => {
-    cover.src = isFirstImage
-        ? "https://www.fieldeagle.com/wp-content/uploads/2023/01/regular_maintenance_header.png"
-        : "https://www.amiraltechnologies.com/wp2k23/wp-content/uploads/2022/12/8839_032_gestion-et-integration-de-maintenance-industrielle-cta-maintenance-industrielle.jpeg";
-    isFirstImage = !isFirstImage; // Toggle the boolean
-}, 6000);
-
+        });
     </script>
 </body>
 </html>

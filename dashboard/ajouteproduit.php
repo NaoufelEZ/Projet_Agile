@@ -63,12 +63,8 @@
     <div class="content">
     <form id="signup-form" method="POST" enctype="multipart/form-data">
         <div class="form-group">
-                <label for="signup-name">Nom de service</label>
-                <input type="text" id="signup-name" name="nom" placeholder="Enter your Nom de Service" required>
-            </div>
-        <div class="form-group">
-                <label for="signup-name">Description</label>
-                <input type="text" id="signup-name" name="description" placeholder="Enter your Description de Service" required>
+                <label for="signup-name">Nom de Produit</label>
+                <input type="text" id="signup-name" name="nom" placeholder="Enter your Nom de Produit" required>
             </div>
         <div class="form-group">
                 <label for="signup-name">Image</label>
@@ -76,7 +72,20 @@
             </div>
             <div class="form-group">
                 <label for="signup-name">Price</label>
-                <input type="text" id="signup-name" name="price" placeholder="Enter your Price" required>
+                <input type="text" id="signup-name" name="price" placeholder="Enter your Produit" required>
+            </div>
+            <div class="form-group">
+                <label for="signup-name">Services</label>
+                <select name="service" required>
+                    <option disabled selected value="">Select Service</option>
+                    <?php
+                        $sql = "SELECT * FROM service";
+                        $req = mysqli_query($conn,$sql);
+                        while($res = mysqli_fetch_row($req)){
+                            echo "<option value='$res[0]'>$res[1]</option>";
+                        }
+                    ?>
+                </select>
             </div>
             <div class="form-group">
                 <button type="submit" name="btn">Ajoute</button>
@@ -90,11 +99,11 @@
                     move_uploaded_file($img['tmp_name'],".".$path) ;
                   $nom = $_POST["nom"];
                   $price = $_POST["price"];
-                  $description = $_POST["description"];
+                  $service = $_POST["service"];
               
-                    $sql = "INSERT INTO service  VALUES (NULL,'$nom','$description','$path',$price);";
+                    $sql = "INSERT INTO products  VALUES (NULL,'$service','$nom','$path',$price);";
                     $req = mysqli_query($conn,$sql);
-                    header("Location:./ajouteservice.php");
+                    header("Location:./ajouteproduit.php");
                     setcookie("add",true,time()+1);
                   }
                 ?>

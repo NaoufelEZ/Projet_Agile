@@ -27,6 +27,8 @@
       <li><a href="./ajouteuser.php">Ajoute User</a></li>
       <li><a href="./services.php">Services</a></li>
       <li><a href="./ajouteservice.php">Ajoute Service</a></li>
+      <li><a href="./produit.php">Produit</a></li>
+      <li><a href="./ajouteproduit.php">Ajoute Produit</a></li>
       <li>
       <a href="" class="there">Reservation</a>
         <ul class="sub-menu">
@@ -52,7 +54,7 @@
         ?>
       <div class='toggle'>
         <ul>
-          <li><a href='./parametre.php'>Paramétre</a></li>
+          <li><a href='../parametre/index.php'>Paramétre</a></li>
           <li><a href='?Logout=true'>Déconnecter</a></li>
         </ul>
         </div>
