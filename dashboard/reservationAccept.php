@@ -44,12 +44,13 @@ if(isset($_SESSION["login"])){
         <th>Num</th>
         <th>Nom Prénom</th>
         <th>Service</th>
+        <th>Produit</th>
         <th>Model Véhicule</th>
         <th>note</th>
         <th>date</th>
         </tr>
         <?php
-        $sql = "SELECT * FROM reservation r,service s,utilisateur u WHERE s.serviceID = r.serviceID and  u.id_Utilisateur = r.clientID and status = 'Accept';";
+        $sql = "SELECT * FROM reservation r,service s,utilisateur u, products p WHERE s.serviceID = r.serviceID and  u.id_Utilisateur = r.clientID AND p.idProduct  = r.idProduct and status = 'Accept';";
         $req = mysqli_query($conn,$sql);
         if(mysqli_num_rows($req) > 0){
         $i = 1;
@@ -58,6 +59,7 @@ if(isset($_SESSION["login"])){
         <td>$i</td>
         <td>". $ligne["nom"]. " " .$ligne["prenom"] ."</td>
         <td>". $ligne["serviceName"] ."</td>
+        <td>". $ligne["nameProduit"] ."</td>
         <td>". $ligne["car_model"] ."</td>
         <td>". $ligne["notes"] ."</td>
         <td>". $ligne["date_rese"] ."</td>

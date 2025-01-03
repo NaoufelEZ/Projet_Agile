@@ -80,6 +80,14 @@ if(isset($_SESSION["login"])){
             echo "<p>". mysqli_num_rows($req) ."</p>";
           ?>
         </div>
+        <div class="card">
+          <h3>gains</h3>
+          <?php
+            $sql = "SELECT SUM(price+pricePro) FROM reservation r,service s,products p WHERE s.serviceID = r.serviceID AND p.idProduct  = r.idProduct AND status = 'Accept';";
+            $req = mysqli_query($conn,$sql);
+            echo "<p>". mysqli_fetch_row($req)[0] ." DT</p>";
+          ?>
+        </div>
       </div>
     </div>
   </div>
