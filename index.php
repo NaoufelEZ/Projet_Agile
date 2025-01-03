@@ -209,6 +209,60 @@
         .toggle.active{
             display: block;
         }
+        nav .notification{
+            position: relative;
+            cursor: pointer;
+        }
+        nav .notification i{
+            font-size: 23px;
+        }
+        nav .notification .nb_noti{
+            height: 15px;
+            width: 15px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+            right: 10px;
+            top: -3px;
+            font-size: 12px;
+            text-align: center;
+            color: #fff;
+            font-weight: bold;
+        }
+        nav .listNoti{
+            position: absolute;
+            right: 40px;
+            top: 140px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 20px;
+            display: none;
+        }
+        .listNoti.active{
+            display: block;
+        }
+        nav .listNoti::before{
+            content:"";
+            position: absolute;
+            top: -16px;
+            right: 55%;
+            border: 9px solid;
+            border-color:  transparent transparent #fff transparent;
+        }
+        nav .listNoti ul{
+            display: list-item;
+        }
+        nav .listNoti ul li{
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        .listNoti div{
+            width: 100%;
+            text-align: center;
+        }
+        nav .listNoti div a{
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -220,14 +274,38 @@
         <ul>
             <li><a href="#">Home</a></li>
             <li><a href="#">About</a></li>
-            <li><a href="#">Products</a></li>
             <li><a href="#">Contact</a></li>
             <?php
             if(isset($_SESSION["login"])){
                 $email = $_SESSION["login"];
-                $sql = "SELECT nom,role FROM  utilisateur WHERE email = '$email'";
+                $sql = "SELECT nom,role,id_Utilisateur  FROM  utilisateur WHERE email = '$email'";
                 $req = mysqli_query($conn,$sql);
                 $res = mysqli_fetch_array($req);
+                $id = $res[2];
+                echo "<div data-id='$id' class='notification'>";
+                $sqlNotification = "SELECT *  FROM reservation WHERE clientID = $id AND status <>'En attente' AND seen = 0;";
+                $reqNotification = mysqli_query($conn,$sqlNotification);
+                $nbNotification = mysqli_num_rows($reqNotification);
+                if($nbNotification > 0){
+                    echo"<div class='nb_noti'>". $nbNotification ."</div>";
+                }
+                echo "<li><i class='fa-solid fa-bell'></i></li>
+                </div>
+                <div class='listNoti'>
+                    <ul>";
+                    $sqlNotificationAll = "SELECT *  FROM reservation WHERE clientID = $id AND status <>'En attente';";
+                    $reqNotificationAll = mysqli_query($conn,$sqlNotificationAll);
+                    while($ligne = mysqli_fetch_assoc($reqNotificationAll)){
+                        echo "<li>le reservation est ". $ligne["status"] . "</li>";
+                    }
+                    echo "
+                        <li>le reservation est</li>
+                        <li>le reservation est</li>
+                        <li>le reservation est</li>
+                    </ul>
+                    <div><a href='./historique.php'>Historique</a></div>
+                </div>
+                ";
                 echo "<div class='avatar'>
                 <li>
                 <h3 class='hgu'>".$res["nom"]."</h3>
@@ -283,6 +361,18 @@
             const toggle = document.querySelector(".toggle");
             toggle.classList.toggle("active");
         });
+        const notification = document.querySelector(".notification");
+        const id = notification.getAttribute('data-id');
+        const list = document.querySelector(".listNoti");
+        notification.addEventListener("click",()=>{
+            list.classList.toggle("active");
+            fetch(`./notification.php?id=${id}`);
+        });
+        const lists = document.querySelectorAll(".listNoti li");
+        if(lists.length >= 5){
+            document.querySelector(".listNoti ul").style.height = "160px";
+            document.querySelector(".listNoti ul").style.overflowY= "scroll";
+        }
     </script>
 </body>
 </html>
