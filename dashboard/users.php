@@ -33,6 +33,8 @@ if(isset($_SESSION["login"])){
       <li><a href="./ajouteuser.php">Ajoute User</a></li>
       <li><a href="./services.php">Services</a></li>
       <li><a href="./ajouteservice.php">Ajoute Service</a></li>
+      <li><a href="./produit.php">Produit</a></li>
+      <li><a href="./ajouteproduit.php">Ajoute Produit</a></li>
       <li>
       <a href="" class="there">Reservation</a>
         <ul class="sub-menu">
