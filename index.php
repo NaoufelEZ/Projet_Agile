@@ -298,11 +298,7 @@
                     while($ligne = mysqli_fetch_assoc($reqNotificationAll)){
                         echo "<li>le reservation est ". $ligne["status"] . "</li>";
                     }
-                    echo "
-                        <li>le reservation est</li>
-                        <li>le reservation est</li>
-                        <li>le reservation est</li>
-                    </ul>
+                    echo "</ul>
                     <div><a href='./historique.php'>Historique</a></div>
                 </div>
                 ";
