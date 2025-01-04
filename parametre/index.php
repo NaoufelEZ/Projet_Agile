@@ -272,10 +272,10 @@
                             $sqlUsername = "SELECT * FROM utilisateur WHERE (id_Utilisateur =$id AND username = '$username') OR NOT EXISTS ( SELECT 1 FROM utilisateur WHERE username = '$username');";
                             $reqUsername = mysqli_query($conn,$sqlUsername);
                             if(mysqli_num_rows($reqCIN) == 0){
-                                echo "<p>CIN deja existe";
+                                echo "<p>CIN deja existe</p>";
                             }
                             else if(mysqli_num_rows($reqEmail) == 0){
-                                echo "<p>Email deja existe";
+                                echo "<p>Email deja existe</p>";
                             }
                             else if(mysqli_num_rows($reqUsername) == 0){
                                 echo "<p>Username deja existe</p>";
