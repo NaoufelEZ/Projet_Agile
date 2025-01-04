@@ -7,6 +7,11 @@ if(isset($_SESSION["login"])){
     $req = mysqli_query($conn,$sql);
     $res = mysqli_fetch_row($req);
     if($res[0] == "Technician" || $res[0] == "Administrateur"){
+        if(isset($_GET["logout"])){
+            session_unset();
+            session_destroy();
+            header("location:../index.php");
+          }
 
 ?>
 <!DOCTYPE html>

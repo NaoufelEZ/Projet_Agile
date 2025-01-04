@@ -7,9 +7,19 @@ if(isset($_SESSION["login"])){
     $req = mysqli_query($conn,$sql);
     $res = mysqli_fetch_row($req);
     if($res[0] == "Administrateur"){
+      if(isset($_GET["logout"])){
+        session_unset();
+        session_destroy();
+        header("location:../index.php");
+      }
       if(isset($_GET["delete"])){
         $id = $_GET["id"];
-        $sql = "DELETE FROM products WHERE serviceID = $id";
+        $sqlImage = "SELECT imageProduit FROM products WHERE idProduct = $id";
+        $reqImage = mysqli_query($conn,$sqlImage);
+        $path = mysqli_fetch_row($reqImage)[0];
+        $path = ".".$path;
+        unlink($path);
+        $sql = "DELETE FROM products WHERE idProduct = $id";
         $req = mysqli_query($conn,$sql);
         header("Location:./produit.php");
         
