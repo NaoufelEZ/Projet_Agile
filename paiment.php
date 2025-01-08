@@ -5,13 +5,14 @@
         $email = $_SESSION["login"];
         $sql = "SELECT id_Utilisateur,role FROM utilisateur WHERE email = '$email'";
         $req = mysqli_query($conn,$sql);
-        $role = mysqli_fetch_row($req)[1];
+        $res = mysqli_fetch_row($req);
+        $role = $res[1];
         if($role == "Client"){
             $service = $_GET["ser"];
             $idService = $service;
             $idproduct = $_GET["pro"];
             if(isset($_POST["btn"])){
-                $id = mysqli_fetch_row($req)[0];
+                $id = $res[0];
                 $model = $_POST["car-model"];
                 $date = $_POST["date"];
                 $msg = $_POST["message"];

@@ -219,7 +219,8 @@ nav .listNoti{
     padding: 10px;
     background-color: #fff;
     border-radius: 20px;
-    display: none;
+    padding: 0;
+    /* display: none; */
 }
 .listNoti.active{
     display: block;
@@ -227,7 +228,7 @@ nav .listNoti{
 nav .listNoti::before{
     content:"";
     position: absolute;
-    top: -16px;
+    top: -18px;
     right: 55%;
     border: 9px solid;
     border-color:  transparent transparent #fff transparent;
@@ -236,8 +237,9 @@ nav .listNoti ul{
     display: list-item;
 }
 nav .listNoti ul li{
-    padding: 10px 0;
+    padding: 10px 10px;
     cursor: pointer;
+    margin: 0;
 }
 .listNoti div{
     width: 100%;
@@ -263,4 +265,8 @@ nav .listNoti .refuse {
 }
 nav .listNoti .seen {
    background-color: gray;
+}
+nav .listNoti .seen:first-child {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }

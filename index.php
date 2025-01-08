@@ -46,15 +46,15 @@
                 </div>
                 <div class='listNoti'>
                     <ul>";
-                    $sqlNotificationAll = "SELECT *  FROM reservation WHERE clientID = $id AND status <>'En attente';";
+                    $sqlNotificationAll = "SELECT *  FROM reservation WHERE clientID = $id AND status <>'En attente' ORDER BY date_update DESC;";
                     $reqNotificationAll = mysqli_query($conn,$sqlNotificationAll);
                     while($ligne = mysqli_fetch_assoc($reqNotificationAll)){
                             $status = $ligne["status"] == "Accept" ? "accept" : "refuse";
-                            if($ligne["seen"] == 1){
-                                echo "<li class='seen'>le reservation est <span class=$status>". $ligne["status"] . "</span></li>";
+                            if($ligne["seen"] == 0){
+                                echo "<li>le reservation est: <span class=$status>". $ligne["status"] . "</span></li>";
                             }
                             else{
-                                echo "<li>le reservation est <span class=$status>". $ligne["status"] . "</span></li>";
+                                echo "<li class='seen'>le reservation est: <span class=$status>". $ligne["status"] . "</span></li>";
                             }
                     }
                     echo "</ul>
