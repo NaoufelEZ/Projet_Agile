@@ -42,14 +42,20 @@
                 if($nbNotification > 0){
                     echo"<div class='nb_noti'>". $nbNotification ."</div>";
                 }
-                echo "<li><i class='fa-solid fa-bell'></i></li>
+                    echo "<li><i class='fa-solid fa-bell'></i></li>
                 </div>
                 <div class='listNoti'>
                     <ul>";
                     $sqlNotificationAll = "SELECT *  FROM reservation WHERE clientID = $id AND status <>'En attente';";
                     $reqNotificationAll = mysqli_query($conn,$sqlNotificationAll);
                     while($ligne = mysqli_fetch_assoc($reqNotificationAll)){
-                        echo "<li>le reservation est ". $ligne["status"] . "</li>";
+                            $status = $ligne["status"] == "Accept" ? "accept" : "refuse";
+                            if($ligne["seen"] == 1){
+                                echo "<li class='seen'>le reservation est <span class=$status>". $ligne["status"] . "</span></li>";
+                            }
+                            else{
+                                echo "<li>le reservation est <span class=$status>". $ligne["status"] . "</span></li>";
+                            }
                     }
                     echo "</ul>
                     <div><a href='./historique.php'>Historique</a></div>

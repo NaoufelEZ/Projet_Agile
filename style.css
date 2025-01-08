@@ -236,7 +236,7 @@ nav .listNoti ul{
     display: list-item;
 }
 nav .listNoti ul li{
-    margin: 10px 0;
+    padding: 10px 0;
     cursor: pointer;
 }
 .listNoti div{
@@ -245,4 +245,22 @@ nav .listNoti ul li{
 }
 nav .listNoti div a{
     text-decoration: none;
+}
+nav .listNoti .accept {
+   font-size: 15px;
+   color: green;
+}
+
+nav .listNoti span {
+   font-size: 15px;
+   font-weight: 700;
+}
+nav .listNoti .accept {
+   color: green;
+}
+nav .listNoti .refuse {
+   color: red;
+}
+nav .listNoti .seen {
+   background-color: gray;
 }

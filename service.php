@@ -59,7 +59,7 @@
             padding: 15px;
             text-align: center;
         }
-        .product-btn a {
+        a {
             color: #fff;
             font-size: 20px;
             font-weight: bold;
@@ -98,7 +98,7 @@
                 echo "<img src='".$row['imageProduit']."' alt='".$row['nameProduit']."'>";
                 echo "<div class='product-name'>".$row['nameProduit']."</div>";
                 echo "<div class='product-price'>Prix: ".$row['pricePro']."DT</div>";
-                echo "<div class='product-btn'><a href='paiment.php?ser=$id&pro=".$row['idProduct']."'>payer</a></div>";
+                echo "<a href='paiment.php?ser=$id&pro=".$row['idProduct']."'><div class='product-btn'>payer</div></a>";
                 echo "</div>";
             }
             ?>

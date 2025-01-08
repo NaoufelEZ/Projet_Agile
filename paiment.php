@@ -1,28 +1,27 @@
 <?php
     require_once("./connect.php");
     session_start();
-    if(!isset($_SESSION["login"])){
-        header("location:./login.php");
-    }
-    $service = $_GET["ser"];
-    $idService = $service;
-    $idproduct = $_GET["pro"];
-
-    $email = $_SESSION["login"];
-    $sql = "SELECT id_Utilisateur FROM utilisateur WHERE email = '$email'";
-    $req = mysqli_query($conn,$sql);
-    $id = mysqli_fetch_row($req)[0];
-    if(isset($_POST["btn"])){
-        $model = $_POST["car-model"];
-        $date = $_POST["date"];
-        $msg = $_POST["message"];
-
-        $sqlInsert = "INSERT INTO reservation VALUES(NULL,$id,$idService,$idproduct,'$model','$msg','En attente','$date',0)";
-        $reqInsert = mysqli_query($conn,$sqlInsert);
-        header("location:./index.php");
-
-
-    }
+    if(isset($_SESSION["login"])){
+        $email = $_SESSION["login"];
+        $sql = "SELECT id_Utilisateur,role FROM utilisateur WHERE email = '$email'";
+        $req = mysqli_query($conn,$sql);
+        $role = mysqli_fetch_row($req)[1];
+        if($role == "Client"){
+            $service = $_GET["ser"];
+            $idService = $service;
+            $idproduct = $_GET["pro"];
+            if(isset($_POST["btn"])){
+                $id = mysqli_fetch_row($req)[0];
+                $model = $_POST["car-model"];
+                $date = $_POST["date"];
+                $msg = $_POST["message"];
+                $sqlInsert = "INSERT INTO reservation VALUES(NULL,$id,$idService,$idproduct,'$model','$msg','En attente','$date',0)";
+                $reqInsert = mysqli_query($conn,$sqlInsert);
+                header("location:./index.php");
+            }
+        }else{
+            header("location:./index.php");
+        }
 ?>
 <!DOCTYPE html>
 <html>
@@ -104,9 +103,10 @@
             <label for="date">Preferred Maintenance Date:</label>
             <input type="date" id="date" name="date" required>
 
-            <label for="message">Additional Notes (optional):</label>
+            <label for="message">Additional Notes:</label>
             <textarea id="message" name="message" rows="4" placeholder="Describe any specific issues with your car or other requests..."></textarea>
             <button type="submit" name="btn">Reserve Appointment</button>
+
         </form>
     </div>
 
@@ -115,3 +115,10 @@
     </footer>
 </body>
 </html>
+<?php
+    }
+    else{
+        header("location:./login.php");
+    }
+
+?>
