@@ -73,7 +73,7 @@ if(isset($_SESSION["login"])){
         }
         }
         else{
-            echo "<tr><td colspan='6'>il n' a pas des Reservation Accept</td></tr>";
+            echo "<tr><td colspan='7'>il n' a pas des Reservation Accept</td></tr>";
         }
 
         ?>
