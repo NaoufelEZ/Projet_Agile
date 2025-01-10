@@ -116,6 +116,7 @@ nav ul li a.login-link:hover {
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
+    height: 470px;
 }
 
 .features .feature img {
@@ -220,7 +221,7 @@ nav .listNoti{
     background-color: #fff;
     border-radius: 20px;
     padding: 0;
-    /* display: none; */
+    display: none;
 }
 .listNoti.active{
     display: block;
@@ -264,7 +265,7 @@ nav .listNoti .refuse {
    color: red;
 }
 nav .listNoti .seen {
-   background-color: gray;
+   background-color: #3333;
 }
 nav .listNoti .seen:first-child {
     border-top-left-radius: 20px;

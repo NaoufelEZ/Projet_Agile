@@ -19,7 +19,6 @@ if(isset($_SESSION["login"])){
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     margin: 70px 0 ;
 }
 
@@ -27,7 +26,7 @@ if(isset($_SESSION["login"])){
     background: white;
     padding: 5px 2rem;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.1);
     width: 90%;
     max-width: 400px;
 }
@@ -53,6 +52,7 @@ if(isset($_SESSION["login"])){
     padding: 0.5rem;
     border: 1px solid #ddd;
     border-radius: 5px;
+    transition: .3s ease-in-out;
 }
 
 .form-group button {
@@ -87,6 +87,13 @@ if(isset($_SESSION["login"])){
     color: red;
     text-align: center;
 }
+.active{
+    border: 2px solid red !important;
+    outline-color: red;
+}
+span{
+    color: red;
+}
 
     </style>
 </head>
@@ -110,28 +117,34 @@ if(isset($_SESSION["login"])){
             <h1 id="form-title">Sign Up</h1>
             <form id="signup-form" method="POST">
             <div class="form-group">
-                    <label for="signup-name">CIN</label>
-                    <input type="text" id="signup-name" name="cin" placeholder="Enter your CIN" required>
+                    <label for="cin">CIN</label>
+                    <input type="text" id="cin" name="cin" placeholder="Enter your CIN">
+                    <span class="cinErr"></span>
                 </div>
                 <div class="form-group">
-                    <label for="signup-name">Nom</label>
-                    <input type="text" id="signup-name" name="nom" placeholder="Enter your name" required>
+                    <label for="nom">Nom</label>
+                    <input type="text" id="nom" name="nom" placeholder="Enter your name">
+                    <span class="nomErr"></span>
                 </div>
                 <div class="form-group">
-                    <label for="signup-name">Prénom</label>
-                    <input type="text" id="signup-name" name="prenom" placeholder="Enter your name" required>
+                    <label for="prenom">Prénom</label>
+                    <input type="text" id="prenom" name="prenom" placeholder="Enter your name">
+                    <span class="prenomErr"></span>
                 </div>
                 <div class="form-group">
-                    <label for="signup-name">Username</label>
-                    <input type="text" id="signup-name" name="username" placeholder="Enter your Username" required>
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your Username">
+                    <span class="usernameErr"></span>
                 </div>
                 <div class="form-group">
-                    <label for="signup-email">Email</label>
-                    <input type="email" id="signup-email" name="email" placeholder="Enter your email" required>
+                    <label for="email">Email</label>
+                    <input type="text" id="email" name="email" placeholder="Enter your email">
+                    <span class="emailErr"></span>
                 </div>
                 <div class="form-group">
-                    <label for="signup-password">Password</label>
-                    <input type="password" id="signup-password" name="password" placeholder="Enter your password" required>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password">
+                    <span class="passwordErr"></span>
                 </div>
                 <div class="form-group">
                     <button type="submit" name="btn">Signup</button>
@@ -177,5 +190,123 @@ if(isset($_SESSION["login"])){
     <footer>
         <p>&copy; 2024 CarFixCo. All Rights Reserved.</p>
     </footer>
+    <script>
+        const form = document.querySelector("form");
+        form.addEventListener("submit",(e)=>{
+            const rexAlpha = /^[A-Za-z]+$/;
+            const rexUsername = /^[a-zA-Z0-9.@&!%]+$/;
+            const rexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+            const cin = document.querySelector("#cin");
+            const nom = document.querySelector("#nom");
+            const prenom = document.querySelector("#prenom");
+            const username = document.querySelector("#username");
+            const email = document.querySelector("#email");
+            const password = document.querySelector("#password");
+            if(cin.value == ""){
+                e.preventDefault();
+                document.querySelector(".cinErr").innerHTML = "CIN ne peut pas être vide";
+                cin.classList.add("active");
+            }
+            else if(cin.value.length != 8){
+                e.preventDefault();
+                document.querySelector(".cinErr").innerHTML = "CIN doit être 8 chiffres";
+                cin.classList.add("active");
+            }
+            else if(isNaN(cin.value)){
+                e.preventDefault();
+                document.querySelector(".cinErr").innerHTML = "CIN doit être un numéro";
+                cin.classList.add("active");
+            }
+            else{
+                document.querySelector(".cinErr").innerHTML = "";
+                cin.classList.remove("active");
+            }
+            if(nom.value == ""){
+                e.preventDefault();
+                document.querySelector(".nomErr").innerHTML = "Nom ne peut pas être vide";
+                nom.classList.add("active");
+            }
+            else if(!rexAlpha.test(nom.value)){
+                e.preventDefault();
+                document.querySelector(".nomErr").innerHTML = "Nom doit contenir uniquement des lettres";
+                nom.classList.add("active");
+            }
+            else if(nom.value.length < 3){
+                e.preventDefault();
+                document.querySelector(".nomErr").innerHTML = "Nom doit avoir au moins 3 caractères";
+                nom.classList.add("active");
+            }
+            else{
+                document.querySelector(".nomErr").innerHTML = "";
+                nom.classList.remove("active");
+            }
+            if(prenom.value == ""){
+                e.preventDefault();
+                document.querySelector(".prenomErr").innerHTML = "Prenom ne peut pas être vide";
+                prenom.classList.add("active");
+            }
+            else if(!rexAlpha.test(prenom.value)){
+                e.preventDefault();
+                document.querySelector(".prenomErr").innerHTML = "Prenom doit contenir uniquement des lettres";
+                prenom.classList.add("active");
+            }
+            else if(prenom.value.length < 3){
+                e.preventDefault();
+                document.querySelector(".prenomErr").innerHTML = "Prenom doit avoir au moins 3 caractères";
+                prenom.classList.add("active");
+            }
+            else{
+                document.querySelector(".prenomErr").innerHTML = "";
+                prenom.classList.remove("active");
+            }
+            if(username.value == ""){
+                e.preventDefault();
+                document.querySelector(".usernameErr").innerHTML = "Username ne peut pas être vide";
+                username.classList.add("active");
+            }
+            else if(!rexUsername.test(username.value)){
+                e.preventDefault();
+                document.querySelector(".usernameErr").innerHTML = "Username non valide";
+                username.classList.add("active");
+            }
+            else if(username.value.length < 3){
+                e.preventDefault();
+                document.querySelector(".usernameErr").innerHTML = "Username doit avoir au moins 3 caractères";
+                username.classList.add("active");
+            }
+            else{
+                document.querySelector(".usernameErr").innerHTML = "";
+                username.classList.remove("active");
+            }
+            if(email.value == ""){
+                e.preventDefault();
+                document.querySelector(".emailErr").innerHTML = "Email ne peut pas être vide";
+                email.classList.add("active");
+            }
+            else if(!rexEmail.test(email.value)){
+                e.preventDefault();
+                document.querySelector(".emailErr").innerHTML = "Email non valide";
+                email.classList.add("active");
+            }
+            else{
+                document.querySelector(".emailErr").innerHTML = "";
+                email.classList.remove("active");
+            }
+            if(password.value == ""){
+                e.preventDefault();
+                document.querySelector(".passwordErr").innerHTML = "Mot de passe ne peut pas être vide";
+                password.classList.add("active");
+            }
+            else if(password.value.length < 6){
+                e.preventDefault();
+                document.querySelector(".passwordErr").innerHTML = "Mot de passe doit avoir au moins 6 caractères";
+                password.classList.add("active");
+            }
+            else{
+                document.querySelector(".passwordErr").innerHTML = "";
+                password.classList.remove("active");
+            }
+        });
+    </script>
 </body>
 </html>

@@ -43,7 +43,7 @@ body {
 }
 
 .form-group {
-    margin-bottom: 5px;
+    margin-bottom: 1rem;
 }
 
 .form-group label {
@@ -118,11 +118,11 @@ body {
         <form id="login-form" method="POST">
             <div class="form-group">
                 <label for="login-email">Email</label>
-                <input type="email" id="login-email" name="email" placeholder="Enter your email" required>
+                <input type="text" id="login-email" name="email" placeholder="Entre Votre Email ou Username" required>
             </div>
             <div class="form-group">
                 <label for="login-password">Password</label>
-                <input type="password" id="login-password" name="password" placeholder="Enter your password" required>
+                <input type="password" id="login-password" name="password" placeholder="Entre Votre Mot de Passe" required>
             </div>
             <div class="form-group">
                 <button type="submit" name="btn">Login</button>

@@ -91,10 +91,8 @@
             <p>Explore high-quality car hardware and repair services.</p>
         </div>
     </div>
-
     </div>
-    <section class="features">
-        
+        <section class="features">
         <?php
             $sqlService = "SELECT * FROM service";
             $req = mysqli_query($conn,$sqlService);

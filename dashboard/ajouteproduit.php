@@ -22,7 +22,11 @@
   <title>Dashboard</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="style.css">
-  
+  <style>
+    span{
+      color:red;
+    }
+    </style>
 </head>
 <body>
   <div class="sidebar">
@@ -69,29 +73,33 @@
     <div class="content">
     <form id="signup-form" method="POST" enctype="multipart/form-data">
         <div class="form-group">
-                <label for="signup-name">Nom de Produit</label>
-                <input type="text" id="signup-name" name="nom" placeholder="Enter your Nom de Produit" required>
+                <label for="nom">Nom de Produit</label>
+                <input type="text" id="nom" name="nom" placeholder="Enter your Nom de Produit">
+                <span class="nomErr"></span>
             </div>
         <div class="form-group">
-                <label for="signup-name">Image</label>
-                <input type="file" id="signup-name" name="image" required>
+                <label for="image">Image</label>
+                <input type="file" id="image" name="image">
+                <span class="imageErr"></span>
             </div>
             <div class="form-group">
-                <label for="signup-name">Price</label>
-                <input type="text" id="signup-name" name="price" placeholder="Enter your Produit" required>
-            </div>
-            <div class="form-group">
-                <label for="signup-name">Services</label>
-                <select name="service" required>
-                    <option disabled selected value="">Select Service</option>
-                    <?php
+                <label for="price">Price</label>
+                <input type="text" id="price" name="price" placeholder="Enter your Produit Price">
+                <span class="priceErr"></span>
+              </div>
+              <div class="form-group">
+                <label for="service">Services</label>
+                <select id="service" name="service">
+                  <option disabled selected value="">Select Service</option>
+                  <?php
                         $sql = "SELECT * FROM service";
                         $req = mysqli_query($conn,$sql);
                         while($res = mysqli_fetch_row($req)){
-                            echo "<option value='$res[0]'>$res[1]</option>";
+                          echo "<option value='$res[0]'>$res[1]</option>";
                         }
-                    ?>
+                        ?>
                 </select>
+                <span class="servicesErr"></span>
             </div>
             <div class="form-group">
                 <button type="submit" name="btn">Ajoute</button>
@@ -102,12 +110,12 @@
                     $exp = explode(".",$img["name"]);
                     $name = time();
                     $path = "./images/$name.".end($exp);
-                    move_uploaded_file($img['tmp_name'],".".$path) ;
-                  $nom = $_POST["nom"];
-                  $price = $_POST["price"];
-                  $service = $_POST["service"];
-              
-                    $sql = "INSERT INTO products  VALUES (NULL,'$service','$nom','$path',$price);";
+                    move_uploaded_file($img['tmp_name'],".".$path);
+                    $nom = $_POST["nom"];
+                    $price = $_POST["price"];
+                    $service = $_POST["service"];
+                    $nomR = str_replace("'","\'",$nom);
+                    $sql = "INSERT INTO products  VALUES (NULL,'$service','$nomR','$path',$price);";
                     $req = mysqli_query($conn,$sql);
                     header("Location:./ajouteproduit.php");
                     setcookie("add",true,time()+1);
@@ -118,6 +126,52 @@
     </div>
   </div>
   <script src="main.js"></script>
+  <script>
+    const form = document.querySelector("form");
+    form.addEventListener("submit",(e)=>{
+      const nom = document.querySelector("#nom").value;
+      const image = document.querySelector("#image").files;
+      const price = document.querySelector("#price").value;
+      const services = document.querySelector("#service");
+      if (nom == "") {
+        e.preventDefault();
+        document.querySelector(".nomErr").innerHTML = "Veuillez saisir un nom.";
+      } else {
+        document.querySelector(".nomErr").innerHTML = "";
+      }
+
+      if (price == "") {
+          e.preventDefault();
+          document.querySelector(".priceErr").innerHTML = "Veuillez saisir un prix.";
+      } else if (isNaN(price)) {
+          e.preventDefault();
+          document.querySelector(".priceErr").innerHTML = "Le prix doit être un nombre valide.";
+      } else {
+          document.querySelector(".priceErr").innerHTML = "";
+      }
+
+      if (image.length == 1) {
+          const typeImage = image[0].type.split("/")[0];
+          if (typeImage == "image") {
+              document.querySelector(".imageErr").innerHTML = "";
+          } else {
+              e.preventDefault();
+              document.querySelector(".imageErr").innerHTML = "Le fichier doit être une image.";
+          }
+      } else {
+          e.preventDefault();
+          document.querySelector(".imageErr").innerHTML = "Veuillez télécharger une image.";
+      }
+
+      if (services.selectedIndex == 0) {
+          e.preventDefault();
+          document.querySelector(".servicesErr").innerHTML = "Veuillez sélectionner un service.";
+      } else {
+          document.querySelector(".servicesErr").innerHTML = "";
+      }
+
+    });
+  </script>
 </body>
 </html>
 <?php
