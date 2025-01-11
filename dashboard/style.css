@@ -67,6 +67,7 @@
     width: 100%;
     position: relative;
     height: 50px;
+    display: flex;
   }
   .top-bar .avatar{
     width: 100px;
@@ -76,6 +77,12 @@
   }
   .top-bar h3{
     cursor: pointer;
+  }
+  .top-bar a{
+    cursor: pointer;
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
   }
 
   .top-bar .toggle{

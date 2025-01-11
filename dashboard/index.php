@@ -46,6 +46,7 @@ if(isset($_SESSION["login"])){
 
   <div class="main-content">
     <div class="top-bar">
+      <a href="../index.php">Accueil</a>
     <div class="avatar">
             <?php
         echo "<h3>". $res[1] ."</h3>";
