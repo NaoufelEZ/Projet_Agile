@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vehicle Maintenance & Hardware</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styleN.css">
 </head>
 <body>
     <header>
@@ -93,6 +93,11 @@
     </div>
     </div>
         <section class="features">
+            <div class="title">
+                <h1>Nos Services</h1>
+            </div>
+        <div class="content">
+
         <?php
             $sqlService = "SELECT * FROM service";
             $req = mysqli_query($conn,$sqlService);
@@ -105,6 +110,7 @@
                 </div></a>";
             }
         ?>
+        </div>
     </section>
     <footer>
         <p>&copy; 2024 CarFixCo. All Rights Reserved.</p>
