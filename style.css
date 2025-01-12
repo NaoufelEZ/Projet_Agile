@@ -2,79 +2,80 @@
     --primary-color: #1e90ff;
     --secondary-color: #f4f4f4;
     --text-color: #333;
-}
-
-* {
+  }
+  
+  * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-body {
+  }
+  
+  body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
     color: var(--text-color);
-}
-
-header {
+    background-color: var(--secondary-color);
+  }
+  
+  header {
     background: var(--primary-color);
     color: white;
     padding: 1rem 2rem;
     text-align: center;
-}
-
-nav {
+  }
+  
+  nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
     background: var(--secondary-color);
-}
-
-nav .logo {
+  }
+  
+  nav .logo {
     font-size: 1.5rem;
     font-weight: bold;
-}
-
-nav ul {
+  }
+  
+  nav ul {
     list-style: none;
     display: flex;
     align-items: center;
-}
-
-nav ul li {
+  }
+  
+  nav ul li {
     margin: 0 1rem;
-}
-nav ul li h3 {
+  }
+  nav ul li h3 {
     cursor: pointer;
-}
-
-nav ul li a {
+  }
+  
+  nav ul li a {
     text-decoration: none;
     color: var(--text-color);
     font-weight: bold;
-}
-
-nav ul li a:hover {
+  }
+  
+  nav ul li a:hover {
     color: var(--primary-color);
-}
-
-/* Specific styling for Login */
-nav ul li a.login-link {
+  }
+  
+  /* Specific styling for Login */
+  nav ul li a.login-link {
     padding: 0.5rem 1rem;
     border: 2px solid var(--primary-color);
     border-radius: 5px;
     color: var(--primary-color);
     background: white;
     transition: all 0.3s ease;
-}
-
-nav ul li a.login-link:hover {
+  }
+  
+  nav ul li a.login-link:hover {
     background: var(--primary-color);
     color: white;
-}
-
-.hero {
+  }
+  
+  .hero {
     background: url('./images/wmremove-transformed.avif') no-repeat center center/cover;
     height: 70vh;
     display: flex;
@@ -83,91 +84,80 @@ nav ul li a.login-link:hover {
     color: white;
     text-align: center;
     padding: 1rem;
-}
-
-.hero h1 {
+  }
+  
+  .hero h1 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
     background: #00000057;
     border-radius: 10px;
     padding: 4px;
     
-}
-
-.hero p {
+  }
+  
+  .hero p {
     font-size: 1.2rem;
     margin-bottom: 2rem;
     background: #00000057;
     border-radius: 10px;
-}
-
-
-.features {
+  }
+  
+  
+  .features {
+    background:#fff;
+    margin: 25px 0;
+    padding-top: 10px;
+  }
+  .features .title h1 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
+  }
+  .features .content {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     padding: 2rem;
+  }
+  
+  .features .content a {
+    text-decoration: none;
+    color: black;
+   }
+  .features .content .feature {
     background: var(--secondary-color);
-}
-
-.features .feature {
-    background: white;
     padding: 1.5rem;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 4px 0px rgb(182 178 178);
     text-align: center;
     height: 470px;
-}
-
-.features .feature img {
+    transition: .5s ease-in-out;
+  }
+  .features .content .feature:hover{
+    opacity: .9;
+  }
+  
+  .features .content .feature img {
     width: 250px;
     height: 250px;
     border-radius: 10px;
-}
-.features  a {
-   text-decoration: none;
-}
-
-.features .feature h3 {
+  }
+  
+  .features .content .feature h3 {
     margin: 1rem 0;
-}
-
-.product-3d {
-    margin: 2rem auto;
-    text-align: center;
-}
-
-.product-3d iframe {
-    width: 80%;
-    height: 500px;
-    border: none;
-}
-
-footer {
+  }
+  
+  footer {
     text-align: center;
     padding: 1rem;
     background: var(--primary-color);
     color: white;
-}
-
-@media (max-width: 768px) {
-    nav ul {
-        flex-direction: column;
-    }
-
-    .hero h1 {
-        font-size: 2rem;
-    }
-
-    .hero p {
-        font-size: 1rem;
-    }
-}
-.avatar{
+  }
+  .avatar{
     position: relative;
     width: 100px;
-}
-.avatar .toggle{
+  }
+  .avatar .toggle{
     background-color: #FFF;
     border-radius: 5px;
     padding: 5px;
@@ -175,32 +165,32 @@ footer {
     top: 40px;
     left: -25px;
     display: none;
-}
-nav .avatar .toggle ul{
+  }
+  nav .avatar .toggle ul{
     display: list-item;
-}
- nav .avatar .toggle ul li{
+  }
+  nav .avatar .toggle ul li{
     padding: 5px 0;
-}
-.toggle::before{
+  }
+  .toggle::before{
     content: "";
     position: absolute;
     top: -16px;
     left: 50%;
     border: 8px solid;
     border-color: transparent transparent #fff transparent;
-}
-.toggle.active{
+  }
+  .toggle.active{
     display: block;
-}
-nav .notification{
+  }
+  nav .notification{
     position: relative;
     cursor: pointer;
-}
-nav .notification i{
+  }
+  nav .notification i{
     font-size: 23px;
-}
-nav .notification .nb_noti{
+  }
+  nav .notification .nb_noti{
     height: 15px;
     width: 15px;
     background-color: red;
@@ -212,8 +202,8 @@ nav .notification .nb_noti{
     text-align: center;
     color: #fff;
     font-weight: bold;
-}
-nav .listNoti{
+  }
+  nav .listNoti{
     position: absolute;
     right: 40px;
     top: 140px;
@@ -222,52 +212,66 @@ nav .listNoti{
     border-radius: 20px;
     padding: 0;
     display: none;
-}
-.listNoti.active{
+  }
+  .listNoti.active{
     display: block;
-}
-nav .listNoti::before{
+  }
+  nav .listNoti::before{
     content:"";
     position: absolute;
     top: -18px;
     right: 55%;
     border: 9px solid;
     border-color:  transparent transparent #fff transparent;
-}
-nav .listNoti ul{
+  }
+  nav .listNoti ul{
     display: list-item;
-}
-nav .listNoti ul li{
+  }
+  nav .listNoti ul li{
     padding: 10px 10px;
     cursor: pointer;
     margin: 0;
-}
-.listNoti div{
+  }
+  .listNoti div{
     width: 100%;
     text-align: center;
-}
-nav .listNoti div a{
+  }
+  nav .listNoti div a{
     text-decoration: none;
-}
-nav .listNoti .accept {
+  }
+  nav .listNoti .accept {
    font-size: 15px;
    color: green;
-}
-
-nav .listNoti span {
+  }
+  
+  nav .listNoti span {
    font-size: 15px;
    font-weight: 700;
-}
-nav .listNoti .accept {
+  }
+  nav .listNoti .accept {
    color: green;
-}
-nav .listNoti .refuse {
+  }
+  nav .listNoti .refuse {
    color: red;
-}
-nav .listNoti .seen {
+  }
+  nav .listNoti .seen {
    background-color: #3333;
-}
-nav .listNoti .seen:first-child {
+  }
+  nav .listNoti .seen:first-child {
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-}
+  }
+  
+  @media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+    }
+  
+    .hero h1 {
+        font-size: 2rem;
+    }
+  
+    .hero p {
+        font-size: 1rem;
+    }
+  }
