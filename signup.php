@@ -13,7 +13,9 @@ if(isset($_SESSION["login"])){
     <title>Signup Form</title>
     <link rel="stylesheet" href="style.css">
     <style>
-
+body{
+    background-color: #fff;
+}
 .container {
     background-color: #fff;
     display: flex;
