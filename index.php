@@ -67,7 +67,7 @@
                 </li>
                 <div class='toggle'>
                 <ul>
-                " .( $res["role"] == 'Client' ? "<li><a href='./historique.php'>historique</a></li>"
+                " .( $res["role"] == 'Client' ? "<li><a href='./historique.php'>Historique</a></li>"
                     : ($res["role"] == 'Administrateur' ? "<li><a href='./dashboard/index.php'>Dashboard</a></li>" : "<li><a href='./dashboard/reservation.php'>Reservation</a></li>"  )).
                 "<li><a href='./parametre/index.php'>Paramétre</a></li>
                 <li><a href='?Logout=true'>Déconnecter</a></li></ul>

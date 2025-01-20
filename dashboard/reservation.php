@@ -11,12 +11,12 @@ if(isset($_SESSION["login"])){
             $type = $_GET["accept"];
             $id = $_GET["id"];
             if($type == "true"){
-                $sqlUpdate = "UPDATE reservation SET status = 'Accept' WHERE reservationID = $id";
+                $sqlUpdate = "UPDATE reservation SET status = 'Accept' and date_update = now() WHERE reservationID = $id";
                 $reqUpdate = mysqli_query($conn,$sqlUpdate);
                 header("location:./reservation.php");
             }
             else{
-                $sqlUpdate = "UPDATE reservation SET status = 'Refuse' WHERE reservationID = $id";
+                $sqlUpdate = "UPDATE reservation SET status = 'Refuse' and date_update = now() WHERE reservationID = $id";
                 $reqUpdate = mysqli_query($conn,$sqlUpdate);
                 header("location:./reservation.php");
             }

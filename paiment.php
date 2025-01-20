@@ -16,7 +16,7 @@
                 $model = $_POST["car-model"];
                 $date = $_POST["date"];
                 $msg = $_POST["message"];
-                $sqlInsert = "INSERT INTO reservation VALUES(NULL,$id,$idService,$idproduct,'$model','$msg','En attente','$date',0)";
+                $sqlInsert = "INSERT INTO reservation VALUES(NULL,$id,$idService,$idproduct,'$model','$msg','En attente','$date',0,now(),now())";
                 $reqInsert = mysqli_query($conn,$sqlInsert);
                 header("location:./index.php");
             }
